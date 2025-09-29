@@ -290,17 +290,8 @@ Once you’re comfortable using MCP to manage feature flags, you can extend the 
 - **Chained workflows** – Combine feature flag updates with deployments, alerts, or CI/CD pipelines.
 - **Cross-tool automation** – Use MCP to coordinate flags, experiments, and data pipelines across multiple services.
 
-## Next steps
+## Resources:
 
-You now have a complete feature flag workflow using PostHog MCP. This approach lets you ship features safely, target specific users, and roll back instantly, all from your code editor.
-
-**Try these next:**
-- Set up [A/B experiments](https://posthog.com/docs/experiments) using MCP commands
-- Create [user surveys](https://posthog.com/docs/surveys) triggered by feature usage.  
-- Connect flags to your [monitoring dashboard](https://posthog.com/docs/product-analytics) for automated rollbacks.
-- Explore [PostHog's other MCP capabilities](https://posthog.com/docs/model-context-protocol) for surveys and analytics.
-
-**Resources:**
 - [PostHog MCP documentation](https://posthog.com/docs/model-context-protocol).
 - [Feature flags best practices](https://posthog.com/docs/feature-flags/best-practices).
 - [PostHog community](https://posthog.com/questions) for questions and support.
