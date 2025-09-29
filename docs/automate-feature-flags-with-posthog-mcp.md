@@ -2,26 +2,34 @@
 sidebar_position: 1
 ---
 
-
 # Automate feature flags with PostHog MCP
 
-In this guide, you’ll learn how to use the PostHog MCP server to create and manage feature flags directly from your editor.
+Manage PostHog feature flags directly from your code editor using AI agents. Instead of switching between your editor and the PostHog dashboard, you can create, update, and monitor feature flags through natural language commands.
 
-The [Model Context Protocol (MCP)](https://posthog.com/docs/model-context-protocol) is a standard that connects agents and editors to external tools. PostHog provides an MCP server so you can manage feature flags, send surveys, or run experiments without leaving your development environment.
+In this guide, you'll build a complete feature flag workflow that enables you to:
+
+- Create feature flags without leaving your editor.
+- Target specific user groups through AI commands.  
+- Roll out features gradually and roll back instantly.
+- Clean up flags when features are fully shipped.
+
+## What is MCP?
+
+The [Model Context Protocol (MCP)](https://posthog.com/docs/model-context-protocol) is a standard that connects AI agents and code editors to external tools. An agent is an AI assistant (like Claude or ChatGPT) that can perform tasks on your behalf.
 
 ## Prerequisites
 
 Before you start, make sure you have:
 
 - An MCP-compatible environment (for example, Cursor).
+- Node.js 18+ and npm/yarn installed.
 - A PostHog account with API credentials that work with MCP.
 - An app already [set up with PostHog](https://posthog.com/blog/envoy-wizard-llm-agent).
 - The [PostHog MCP server](https://posthog.com/docs/model-context-protocol) installed and running.
 
 ## Example app: TaskHog
 
-This example uses a simple to-do app. You can explore the code in the [example repository](LINK).
-<!-- TODO: add repo link -->
+This example uses a simple to-do app. You can explore the code in the [example repository](https://github.com/sylwiavargas/TaskHog).
 
 <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-1.png" alt="A to-do list app with five tasks, one completed and crossed out." height="500"/>
 
@@ -99,7 +107,7 @@ But you don’t need to switch contexts. You can keep working in your editor and
 
 ## Step 3: Invite a test cohort
 
-Feature flags are most useful when you can test changes with a small group before rolling them out widely. With MCP, you can target specific users or groups without leaving your editor.
+Use feature flags to test changes with small groups before wide rollouts. You can target specific users or groups.
 
 With MCP, you can change feature-flag targeting rules from your dev environment and target:
 
