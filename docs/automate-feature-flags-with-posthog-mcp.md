@@ -90,14 +90,16 @@ Then add a **"Mark all complete"** button to the to-do list:
 
 Now wrap the button in a feature flag check. It's just one line of code so you may manage it yourself but of course you can ask your agent to do it for you. Anyway, here is the code:
 
-```diff
-+ <PostHogFeature flag="mark-all-complete" match={true}>
+```jsx
+// highlight-next-line
+<PostHogFeature flag="mark-all-complete" match={true}>
   {todos.length > 0 && (
     <button onClick={markAllComplete} className="mark-all-button">
       Mark all complete
     </button>
   )}
-+ </PostHogFeature>
+// highlight-next-line
+</PostHogFeature>
 ```
 
 The button only appears when the `mark-all-complete` flag is active.
