@@ -138,3 +138,76 @@ Now, if you check the app, you will see that the feature is available to our har
     <p style={{fontSize: '14px', color: '#666', marginTop: '10px'}}>Feature flag is off.</p>
   </div>
 </div>
+
+At this point, you can add the feature flag users according to your product needs. 
+
+### Updating a flag
+
+You might need to adjust rollout percentage or targeting rules after launch. For example, to expand targeting rules:
+
+```bash
+/mcp update-feature-flag --key mark-all-complete --filters 'email CONTAINS "@acme.com" OR email CONTAINS "@partner.com"'
+```
+
+Or to increase rollout to 50%:
+
+```bash
+/mcp update-feature-flag --key mark-all-complete --rollout 50
+```
+
+This can be verified either within the terminal or, if you prefer, on the PostHog dashboard:
+
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-5-fewer-users.png" alt="PostHog dashboard showing a feature flag named 'mark-all-complete'. Release conditions indicate it applies to 50% of users with email addresses ending in @example.com. The flag status is shown as ENABLED." height="500"/>
+
+## Handling updates, rollbacks, and cleanup
+
+Once your feature is live, you will often need to make changes. Apart from the updates which we covered in the previous point, MCP lets you also disable, or retire feature flags directly from your editor.
+
+### Roll back quickly
+
+If a feature causes issues in production, you can disable its flag immediately:
+
+```bash
+/mcp update-feature-flag --key mark-all-complete --active false
+```
+
+This lets you roll back without redeploying your app.
+
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-6.png" alt='PostHog dashboard showing the feature flag "mark-all-complete". Release conditions target 50% of users with email addresses ending in @example.com. The status is highlighted as DISABLED.' height="500"/>
+
+### Clean up shipped flags
+
+When a feature is fully rolled out, you don’t need the flag anymore. Instead of deleting it right away, follow a two-step cleanup:
+
+1. Remove the flag from your codebase. Replace the `PostHogFeature` wrapper with the permanent feature code.
+
+2. Archive or delete the flag in PostHog. Use MCP to mark the flag as inactive or remove it completely if your team prefers.
+
+```bash
+/mcp delete-feature-flag --key mark-all-complete
+```
+
+Cleaning up feature flags keeps your codebase lean and prevents confusion in future rollouts.
+
+## Advanced: Next things to try
+
+Once you’re comfortable using MCP to manage feature flags, you can extend the workflow to cover more advanced use cases:
+
+- **Automated A/B experiments** – Create multiple variants of a feature and measure impact on key metrics.
+- **Surveys triggered by feature usage** – Collect feedback from users who interact with a new feature.
+- **Integrating with metrics and SLIs** – Connect rollouts to your monitoring stack so you can pause or roll back automatically if performance drops.
+- **Chained workflows** – Combine feature flag updates with deployments, alerts, or CI/CD pipelines.
+- **Cross-tool automation** – Use MCP to coordinate flags, experiments, and data pipelines across multiple services.
+
+## Wrapping up
+
+Using the PostHog MCP server, you can create, test, and manage feature flags without leaving your editor. This workflow helps you:
+
+- Ship features safely behind flags.  
+- Target specific users or cohorts.  
+- Roll out gradually and roll back quickly if needed.  
+- Clean up flags once features are fully launched.  
+
+From here, you can expand into experiments, surveys, and monitoring integrations to make your workflow even stronger.  
+
+By keeping feature management close to your development environment, you shorten feedback loops and reduce context switching.
