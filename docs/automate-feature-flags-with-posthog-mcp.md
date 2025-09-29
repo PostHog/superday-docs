@@ -13,9 +13,13 @@ In this guide, you'll build a complete feature flag workflow that enables you to
 - Roll out features gradually and roll back instantly.
 - Clean up flags when features are fully shipped.
 
+<<<<<<< HEAD
 <!-- Add a short section somewhere that defines the intended audience for this documentation "You'll find this guide useful if..." -->
 
 ## What is MCP?
+=======
+### What is MCP?
+>>>>>>> 00097bd (adds call-out)
 
 The [Model Context Protocol (MCP)](https://posthog.com/docs/model-context-protocol) is a standard that connects AI agents and code editors to external tools. An agent is an AI assistant (like Claude or ChatGPT) that can perform tasks on your behalf.
 
@@ -127,11 +131,32 @@ You can also ask your agent for information about existing flags:
 
 ```bash
 Show me all feature flags in this project
+<<<<<<< HEAD
+```
+
+```bash
+Get the details for the mark-all-complete feature flag
+=======
+>>>>>>> 00097bd (adds call-out)
 ```
 
 ```bash
 Get the details for the mark-all-complete feature flag
 ```
+
+:::warning When not to automate feature flags
+
+While MCP automation is powerful for most feature flags, use manual controls for:
+
+- **High-risk features** that could impact revenue, data integrity, or user safety.
+- **Security-sensitive logic** like authentication, authorization, or payment processing.
+- **Infrastructure changes** that affect database connections, API endpoints, or third-party integrations.
+- **Compliance-critical features** in regulated industries (such as healthcare, finance).
+- **Features with complex dependencies** that require careful coordination across multiple systems.
+
+For these scenarios, use PostHog's dashboard for manual review and approval workflows.
+
+:::
 
 ## Step 3: Invite a test cohort
 
