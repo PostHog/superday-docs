@@ -66,10 +66,10 @@ The repository has branches that reflect three stages of the tutorial:
 
 We'll add a new **Mark all complete** button and put it behind a feature flag without ever leaving your IDE. In other words, no need to open your browser, ever. As you will see, using MCP, you will just chat with your agent and:
 
-- Create a feature flag.
-- Target a test group of users.
-- Roll it out to all users once it’s stable.
-- Clean up when the feature is fully shipped.
+- [Create a feature flag](#step-2-use-the-mcp-server-to-create-a-feature-flag).
+- [Target a test group of users](#step-3-invite-a-test-cohort).
+- [Roll it out to all users once it's stable](#updating-a-flag).
+- [Clean up when the feature is fully shipped](#clean-up-shipped-flags).
 
 By the end, you’ll have a repeatable workflow for automating feature flag management.
 
