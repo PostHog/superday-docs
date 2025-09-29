@@ -62,6 +62,8 @@ The repository has branches that reflect three stages of the tutorial:
 - **deleted-flag**: finished app with deleted flags.
 :::
 
+### Game plan
+
 We'll add a new **Mark all complete** button and put it behind a feature flag without ever leaving your IDE. In other words, no need to open your browser, ever. As you will see, using MCP, you will just chat with your agent and:
 
 - Create a feature flag.
@@ -205,9 +207,9 @@ Now, if you check the app, you will see that the feature is available to our har
   </div>
 </div>
 
-At this point, you can add the feature flag users according to your product needs. 
+At this point, you can add the feature flag users according to your product needs.
 
-### Updating a flag
+## Updating a flag
 
 You might need to adjust rollout percentage or targeting rules after launch. For example, to expand targeting rules, Ask your agent to make these changes:
 
