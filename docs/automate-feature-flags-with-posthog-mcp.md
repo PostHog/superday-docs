@@ -122,8 +122,19 @@ Here are example commands you might run (adapt them to your MCP client or API sy
 /mcp update-feature-flag --key mark-all-complete --users user1@example.com user2@example.com
 ```
 
-After applying the targeting rules:
+However, you don't need to even remember these commands. You can just ask your agent to do this job for you:
 
-- Ask your testers (for instance, your colleagues) to access the feature.
-- Use PostHog’s UI or metrics API to confirm that only those in your test cohort have the feature enabled.
-- Monitor feedback and metrics before you expand the rollout.
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-3-agent-conversation.png" alt="Code snippet showing a PostHog feature flag update. The flag 'mark-all-complete' is set to show only for users with emails containing '@example.com'." height="500"/>
+
+Now, if you check the app, you will see that the feature is available to our hard-coded user, `brambell.prickleton@example.com` and disappears when the user changes:
+
+<div style={{display: 'flex', gap: '20px', alignItems: 'flex-start'}}>
+  <div style={{flex: 1, textAlign: 'center'}}>
+    <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-4-feature-flag-working.png" alt="A green 'Mark all complete' button is visible, showing the enabled feature flag for the logged-in user email is on the @example.com domain." style={{width: '100%', height: 'auto'}}/>
+    <p style={{fontSize: '14px', color: '#666', marginTop: '10px'}}>Feature flag is enabled.</p>
+  </div>
+  <div style={{flex: 1, textAlign: 'center'}}>
+    <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-4-feature-flag-working-2.png" alt="Basic to-do app as the logged-in user email is not at @example.com domain." style={{width: '100%', height: 'auto'}}/>
+    <p style={{fontSize: '14px', color: '#666', marginTop: '10px'}}>Feature flag is off.</p>
+  </div>
+</div>
