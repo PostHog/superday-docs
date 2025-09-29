@@ -13,17 +13,28 @@ In this guide, you'll build a complete feature flag workflow that enables you to
 - Roll out features gradually and roll back instantly.
 - Clean up flags when features are fully shipped.
 
+<!-- Add a short section somewhere that defines the intended audience for this documentation "You'll find this guide useful if..." -->
+
 ## What is MCP?
 
 The [Model Context Protocol (MCP)](https://posthog.com/docs/model-context-protocol) is a standard that connects AI agents and code editors to external tools. An agent is an AI assistant (like Claude or ChatGPT) that can perform tasks on your behalf.
+
+## Who this guide is for
+
+You'll find this guide useful if you:
+
+- Manage feature rollouts in production applications.
+- Love increasing your productivity (or want to reduce context switching between tools during development).
+- Need to quickly roll back features without redeploying.
+- Work with AI-powered development environments like Cursor or Claude.
 
 ## Prerequisites
 
 Before you start, make sure you have:
 
-- An MCP-compatible environment (for example, Cursor).
-- Node.js 18+ and npm/yarn installed.
-- A PostHog account with API credentials that work with MCP.
+- An MCP-compatible code editor such as [Cursor](https://cursor.sh/) or VS Code with the MCP extension.
+- Node.js 18+ and npm or yarn installed.
+- A PostHog account.
 - An app already [set up with PostHog](https://posthog.com/blog/envoy-wizard-llm-agent).
 - The [PostHog MCP server](https://posthog.com/docs/model-context-protocol) installed and running.
 
@@ -31,7 +42,20 @@ Before you start, make sure you have:
 
 This example uses a simple to-do app. You can explore the code in the [example repository](https://github.com/sylwiavargas/TaskHog).
 
-<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-1.png" alt="A to-do list app with five tasks, one completed and crossed out." height="500"/>
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-1.png" alt="TaskHog to-do app interface." height="500"/>
+
+The TaskHog app has a simple structure:
+
+```mermaid
+graph TD
+    A[TaskHog App] --> B[App.tsx - Main component]
+    A --> C[components/ - UI components]
+    A --> D[styles/ - CSS files]
+    B --> E[Todo list display]
+    B --> F[Add todo functionality]
+    B --> G[Mark complete functionality]
+    B --> H[PostHog integration]
+```
 
 We’ll add a new **Mark all complete** button and put it behind a feature flag. Using MCP, you’ll:
 
@@ -44,14 +68,16 @@ By the end, you’ll have a repeatable workflow for automating feature flag mana
 
 ## Step 1: Add a feature behind a flag
 
-In the `App.tsx` file, add a **"Mark all complete"** button to the to-do list:
+In the `App.tsx` file, first import the PostHog feature flag component:
 
 ```jsx
-const markAllComplete = () => {
-  setTodos(todos.map((todo) => ({ ...todo, completed: true })));
-};
+import { PostHogFeature } from 'posthog-js/react';
+```
 
-/// create the button 
+Then add a **"Mark all complete"** button to the to-do list:
+
+```jsx
+// Create the button inside your component's return statement 
 {todos.length > 0 && (
   <button onClick={markAllComplete} className="mark-all-button">
     Mark all complete
@@ -59,7 +85,7 @@ const markAllComplete = () => {
 )}
 ```
 
-Now import `PostHogFeature` from `"posthog-js/react"` and wrap the button in a feature flag check:
+Now wrap the button in a feature flag check:
 
 ```jsx
 <PostHogFeature flag="mark-all-complete" match={true}>
@@ -75,34 +101,36 @@ The button only appears when the `mark-all-complete` flag is active.
 
 ## Step 2: Use the MCP server to create a feature flag
 
-Next, create the feature flag in PostHog. Instead of opening the PostHog UI, use your agent with the MCP server:
+Ask your AI agent to create the feature flag:
 
 ```bash
-/mcp feature-flag-create mark-all-complete
+Create a feature flag called "mark-all-complete" for the Mark All Complete button
 ```
 
-You’ll get a response similar to:
+Your agent will use the MCP server and respond with:
 
-> Created feature flag mark-all-complete with the following configuration:
-> Name: Mark All Complete Button
-> Key: mark-all-complete
-> Description: Controls visibility of the “Mark all complete” button in the TaskHog app
-> Status: Active
-> Rollout: 100% to all users
-> You can view and manage this feature flag at: https://...
+```bash
+Created feature flag mark-all-complete with the following configuration:
+Name: Mark All Complete Button
+Key: mark-all-complete
+Description: Controls visibility of the "Mark all complete" button in the TaskHog app
+Status: Active
+Rollout: 100% to all users
+You can view and manage this feature flag at: https://app.posthog.com/...
+```
 
 You can view the flag in the PostHog UI:
 
-<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-2-posthog-ui.png" alt="PostHog feature flag page for ‘mark-all-complete,’ showing it is enabled and rolled out to all users." height="500"/>
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-2-posthog-ui.png" alt="PostHog dashboard showing mark-all-complete feature flag." height="500"/>
 
-But you don’t need to switch contexts. You can keep working in your editor and ask the agent to interact with your feature flags:
+You can also ask your agent for information about existing flags:
 
 ```bash
-# see all feature flags
-/mcp feature-flag-get-all
+Show me all feature flags in this project
+```
 
-# get a specific feature flag definition
-/mcp feature-flag-get-definition mark-all-complete
+```bash
+Get the details for the mark-all-complete feature flag
 ```
 
 ## Step 3: Invite a test cohort
@@ -117,32 +145,33 @@ With MCP, you can change feature-flag targeting rules from your dev environment 
 
 PostHog’s MCP server supports operations like `update-feature-flag` to modify filters, rollout settings, and user targeting.
 
-Here are example commands you might run (adapt them to your MCP client or API syntax):
+You can ask your AI agent to target specific users in natural language:
 
 ```bash
-# Target only users with @acme.com in their email
-/mcp update-feature-flag --key mark-all-complete --filters 'email CONTAINS "@example.com"'
-
-# Or set a small rollout percentage (for example, 10%)
-/mcp update-feature-flag --key mark-all-complete --rollout 10
-
-# Or target a specific list of users by identifier (for example, user IDs or emails)
-/mcp update-feature-flag --key mark-all-complete --users user1@example.com user2@example.com
+Update the mark-all-complete flag to only show for users with @example.com emails
 ```
 
-However, you don't need to even remember these commands. You can just ask your agent to do this job for you:
+```bash
+Set the mark-all-complete flag to show for 10% of users
+```
 
-<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-3-agent-conversation.png" alt="Code snippet showing a PostHog feature flag update. The flag 'mark-all-complete' is set to show only for users with emails containing '@example.com'." height="500"/>
+```bash
+Target the mark-all-complete flag to specific users: user1@example.com, user2@example.com
+```
+
+Long story short, you can skip memorizing commands. If you know what effect you're after, you can ask your AI agent in your own words:
+
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-3-agent-conversation.png" alt="AI agent conversation updating feature flag targeting." height="500"/>
 
 Now, if you check the app, you will see that the feature is available to our hard-coded user, `brambell.prickleton@example.com` and disappears when the user changes:
 
 <div style={{display: 'flex', gap: '20px', alignItems: 'flex-start'}}>
   <div style={{flex: 1, textAlign: 'center'}}>
-    <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-4-feature-flag-working.png" alt="A green 'Mark all complete' button is visible, showing the enabled feature flag for the logged-in user email is on the @example.com domain." style={{width: '100%', height: 'auto'}}/>
+    <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-4-feature-flag-working.png" alt="TaskHog app with Mark all complete button enabled." style={{width: '100%', height: 'auto'}}/>
     <p style={{fontSize: '14px', color: '#666', marginTop: '10px'}}>Feature flag is enabled.</p>
   </div>
   <div style={{flex: 1, textAlign: 'center'}}>
-    <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-4-feature-flag-working-2.png" alt="Basic to-do app as the logged-in user email is not at @example.com domain." style={{width: '100%', height: 'auto'}}/>
+    <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-4-feature-flag-working-2.png" alt="TaskHog app with feature flag disabled." style={{width: '100%', height: 'auto'}}/>
     <p style={{fontSize: '14px', color: '#666', marginTop: '10px'}}>Feature flag is off.</p>
   </div>
 </div>
@@ -151,21 +180,19 @@ At this point, you can add the feature flag users according to your product need
 
 ### Updating a flag
 
-You might need to adjust rollout percentage or targeting rules after launch. For example, to expand targeting rules:
+You might need to adjust rollout percentage or targeting rules after launch. For example, to expand targeting rules, Ask your agent to make these changes:
 
 ```bash
-/mcp update-feature-flag --key mark-all-complete --filters 'email CONTAINS "@acme.com" OR email CONTAINS "@partner.com"'
+Expand the mark-all-complete flag to include @acme.com and @partner.com email domains
 ```
 
-Or to increase rollout to 50%:
-
 ```bash
-/mcp update-feature-flag --key mark-all-complete --rollout 50
+Increase the mark-all-complete flag rollout to 50% of users
 ```
 
 This can be verified either within the terminal or, if you prefer, on the PostHog dashboard:
 
-<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-5-fewer-users.png" alt="PostHog dashboard showing a feature flag named 'mark-all-complete'. Release conditions indicate it applies to 50% of users with email addresses ending in @example.com. The flag status is shown as ENABLED." height="500"/>
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-5-fewer-users.png" alt="PostHog dashboard showing 50% rollout configuration." height="500"/>
 
 ## Handling updates, rollbacks, and cleanup
 
@@ -176,26 +203,53 @@ Once your feature is live, you will often need to make changes. Apart from the u
 If a feature causes issues in production, you can disable its flag immediately:
 
 ```bash
-/mcp update-feature-flag --key mark-all-complete --active false
+Disable the mark-all-complete feature flag
 ```
 
-This lets you roll back without redeploying your app.
+You can roll back without redeploying your app, giving you instant control over feature availability.
 
-<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-6.png" alt='PostHog dashboard showing the feature flag "mark-all-complete". Release conditions target 50% of users with email addresses ending in @example.com. The status is highlighted as DISABLED.' height="500"/>
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-6.png" alt='PostHog dashboard showing disabled feature flag' height="500"/>
 
 ### Clean up shipped flags
 
-When a feature is fully rolled out, you don’t need the flag anymore. Instead of deleting it right away, follow a two-step cleanup:
+When a feature is fully rolled out, you don't need the flag anymore. Follow this two-step cleanup process:
 
-1. Remove the flag from your codebase. Replace the `PostHogFeature` wrapper with the permanent feature code.
+1. **Remove the flag from your codebase**: Replace the `PostHogFeature` wrapper with the permanent feature code:
 
-2. Archive or delete the flag in PostHog. Use MCP to mark the flag as inactive or remove it completely if your team prefers.
+```jsx
+// Remove this wrapper
+<PostHogFeature flag="mark-all-complete" match={true}>
+    {/* Keep only the button code */}
+</PostHogFeature>
+```
+
+2. **Delete the flag in PostHog**: Ask your agent to clean up:
 
 ```bash
-/mcp delete-feature-flag --key mark-all-complete
+Delete the mark-all-complete feature flag since it's fully shipped
 ```
 
 Cleaning up feature flags keeps your codebase lean and prevents confusion in future rollouts.
+
+## Troubleshooting common issues and solutions
+
+**Agent doesn't recognize MCP commands**
+
+- Verify the PostHog MCP server is running and connected.
+- Check your API credentials are properly configured.
+- Restart your code editor and reconnect to the MCP server.
+
+**Feature flag not appearing in app**
+
+- Confirm the flag key matches exactly (case-sensitive).
+- Check that PostHog is properly initialized in your app.
+- Verify the user meets the targeting criteria you set.
+
+**Commands return errors**
+
+- Ensure you have the necessary permissions in your PostHog project
+- Check that the feature flag exists before trying to update it
+- Verify your PostHog project ID is correctly configured in MCP
 
 ## Advanced: Next things to try
 
@@ -207,15 +261,17 @@ Once you’re comfortable using MCP to manage feature flags, you can extend the 
 - **Chained workflows** – Combine feature flag updates with deployments, alerts, or CI/CD pipelines.
 - **Cross-tool automation** – Use MCP to coordinate flags, experiments, and data pipelines across multiple services.
 
-## Wrapping up
+## Next steps
 
-Using the PostHog MCP server, you can create, test, and manage feature flags without leaving your editor. This workflow helps you:
+You now have a complete feature flag workflow using PostHog MCP. This approach lets you ship features safely, target specific users, and roll back instantly, all from your code editor.
 
-- Ship features safely behind flags.  
-- Target specific users or cohorts.  
-- Roll out gradually and roll back quickly if needed.  
-- Clean up flags once features are fully launched.  
+**Try these next:**
+- Set up [A/B experiments](https://posthog.com/docs/experiments) using MCP commands
+- Create [user surveys](https://posthog.com/docs/surveys) triggered by feature usage.  
+- Connect flags to your [monitoring dashboard](https://posthog.com/docs/product-analytics) for automated rollbacks.
+- Explore [PostHog's other MCP capabilities](https://posthog.com/docs/model-context-protocol) for surveys and analytics.
 
-From here, you can expand into experiments, surveys, and monitoring integrations to make your workflow even stronger.  
-
-By keeping feature management close to your development environment, you shorten feedback loops and reduce context switching.
+**Resources:**
+- [PostHog MCP documentation](https://posthog.com/docs/model-context-protocol).
+- [Feature flags best practices](https://posthog.com/docs/feature-flags/best-practices).
+- [PostHog community](https://posthog.com/questions) for questions and support.
