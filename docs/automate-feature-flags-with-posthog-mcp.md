@@ -33,12 +33,11 @@ Before you start, make sure you have:
 - An MCP-compatible code editor such as [Cursor](https://cursor.sh/) or VS Code with the MCP extension.
 - Node.js 18+ and npm or yarn installed.
 - A PostHog account.
-
-You can use your own app that is already [set up with PostHog](https://posthog.com/blog/envoy-wizard-llm-agent) or follow along with the example app we use below.
+- A cloned [example app repository](https://github.com/sylwiavargas/TaskHog).
 
 ## Example app: TaskHog
 
-This example uses a simple Vite app built with React. You can explore the code in the [GitHub repository](https://github.com/sylwiavargas/TaskHog).
+This example is a [Vite app built with React](https://github.com/sylwiavargas/TaskHog).
 
 <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-1.png" alt="TaskHog to-do app interface." height="500"/>
 
