@@ -66,8 +66,9 @@ By the end, you’ll have a repeatable workflow for automating feature flag mana
 
 ## Step 0: Install the PostHog MCP server
 
-<!-- add info about it 
-- The [PostHog MCP server](https://posthog.com/docs/model-context-protocol) installed and running in your coding agent-->
+Install the PostHog MCP server to connect your AI agent to PostHog. This enables you to manage feature flags, run analytics queries, create A/B experiments, and collect user feedback through natural language commands directly from your editor.
+
+Follow the [MCP setup guide](https://posthog.com/docs/model-context-protocol) to install and configure the server with your PostHog API credentials.
 
 ## Step 1: Add a feature behind a flag
 
