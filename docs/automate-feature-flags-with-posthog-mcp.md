@@ -13,13 +13,7 @@ In this guide, you'll build a complete feature flag workflow that enables you to
 - Roll out features gradually and roll back instantly.
 - Clean up flags when features are fully shipped.
 
-<<<<<<< HEAD
-<!-- Add a short section somewhere that defines the intended audience for this documentation "You'll find this guide useful if..." -->
-
-## What is MCP?
-=======
 ### What is MCP?
->>>>>>> 00097bd (adds call-out)
 
 The [Model Context Protocol (MCP)](https://posthog.com/docs/model-context-protocol) is a standard that connects AI agents and code editors to external tools. An agent is an AI assistant (like Claude or ChatGPT) that can perform tasks on your behalf.
 
@@ -39,12 +33,12 @@ Before you start, make sure you have:
 - An MCP-compatible code editor such as [Cursor](https://cursor.sh/) or VS Code with the MCP extension.
 - Node.js 18+ and npm or yarn installed.
 - A PostHog account.
-- An app already [set up with PostHog](https://posthog.com/blog/envoy-wizard-llm-agent).
-- The [PostHog MCP server](https://posthog.com/docs/model-context-protocol) installed and running.
+
+You can use your own app that is already [set up with PostHog](https://posthog.com/blog/envoy-wizard-llm-agent) or follow along with the example app we use below.
 
 ## Example app: TaskHog
 
-This example uses a simple to-do app. You can explore the code in the [example repository](https://github.com/sylwiavargas/TaskHog).
+This example uses a simple Vite app built with React. You can explore the code in the [GitHub repository](https://github.com/sylwiavargas/TaskHog).
 
 <img src="/img/automate-feature-flags-with-posthog-mcp/example-app-1.png" alt="TaskHog to-do app interface." height="500"/>
 
@@ -61,14 +55,19 @@ graph TD
     B --> H[PostHog integration]
 ```
 
-We’ll add a new **Mark all complete** button and put it behind a feature flag. Using MCP, you’ll:
+We’ll add a new **Mark all complete** button and put it behind a feature flag without ever leaving your IDE. In other words, no need to open your browser, ever. As you will see, using MCP, you will just chat with your agent and:
 
-- Create the feature flag.
+- Create a feature flag.
 - Target a test group of users.
 - Roll it out to all users once it’s stable.
 - Clean up when the feature is fully shipped.
 
 By the end, you’ll have a repeatable workflow for automating feature flag management.
+
+## Step 0: Install the PostHog MCP server
+
+<!-- add info about it 
+- The [PostHog MCP server](https://posthog.com/docs/model-context-protocol) installed and running in your coding agent-->
 
 ## Step 1: Add a feature behind a flag
 
@@ -89,29 +88,29 @@ Then add a **"Mark all complete"** button to the to-do list:
 )}
 ```
 
-Now wrap the button in a feature flag check:
+Now wrap the button in a feature flag check. It's just one line of code so you may manage it yourself but of course you can ask your agent to do it for you. Anyway, here is the code:
 
-```jsx
-<PostHogFeature flag="mark-all-complete" match={true}>
+```diff
++ <PostHogFeature flag="mark-all-complete" match={true}>
   {todos.length > 0 && (
     <button onClick={markAllComplete} className="mark-all-button">
       Mark all complete
     </button>
   )}
-</PostHogFeature>
++ </PostHogFeature>
 ```
 
 The button only appears when the `mark-all-complete` flag is active.
 
 ## Step 2: Use the MCP server to create a feature flag
 
-Ask your AI agent to create the feature flag:
+You can now ask your AI agent to create the feature flag. Open your Cursor Chat (or your coding agent of preference) and strike up a chat:
 
 ```bash
-Create a feature flag called "mark-all-complete" for the Mark All Complete button
+Create a feature flag in PostHog called "mark-all-complete" for the Mark All Complete button
 ```
 
-Your agent will use the MCP server and respond with:
+Your agent will use the PostHog MCP server and respond with something like this:
 
 ```bash
 Created feature flag mark-all-complete with the following configuration:
@@ -123,26 +122,21 @@ Rollout: 100% to all users
 You can view and manage this feature flag at: https://app.posthog.com/...
 ```
 
-You can view the flag in the PostHog UI:
-
-<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-2-posthog-ui.png" alt="PostHog dashboard showing mark-all-complete feature flag." height="500"/>
-
-You can also ask your agent for information about existing flags:
+Then ask your agent for information about existing flags:
 
 ```bash
 Show me all feature flags in this project
-<<<<<<< HEAD
 ```
 
-```bash
-Get the details for the mark-all-complete feature flag
-=======
->>>>>>> 00097bd (adds call-out)
-```
+Or:
 
 ```bash
 Get the details for the mark-all-complete feature flag
 ```
+
+If you're feeling dubious, you may of course verify the flag in the PostHog UI:
+
+<img src="/img/automate-feature-flags-with-posthog-mcp/example-app-2-posthog-ui.png" alt="PostHog dashboard showing mark-all-complete feature flag." height="500"/>
 
 :::warning When not to automate feature flags
 
