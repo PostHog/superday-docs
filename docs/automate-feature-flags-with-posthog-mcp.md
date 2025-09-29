@@ -54,7 +54,15 @@ TaskHog App
 └── styles/ (CSS files)
 ```
 
-We’ll add a new **Mark all complete** button and put it behind a feature flag without ever leaving your IDE. In other words, no need to open your browser, ever. As you will see, using MCP, you will just chat with your agent and:
+:::info Repository Branches
+The repository has branches that reflect three stages of the tutorial:
+
+- **main**: starting setup.
+- **finished**: finished app with working feature flags.
+- **deleted-flag**: finished app with deleted flags.
+:::
+
+We'll add a new **Mark all complete** button and put it behind a feature flag without ever leaving your IDE. In other words, no need to open your browser, ever. As you will see, using MCP, you will just chat with your agent and:
 
 - Create a feature flag.
 - Target a test group of users.
