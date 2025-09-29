@@ -44,15 +44,15 @@ This example uses a simple Vite app built with React. You can explore the code i
 
 The TaskHog app has a simple structure:
 
-```mermaid
-graph TD
-    A[TaskHog App] --> B[App.tsx - Main component]
-    A --> C[components/ - UI components]
-    A --> D[styles/ - CSS files]
-    B --> E[Todo list display]
-    B --> F[Add todo functionality]
-    B --> G[Mark complete functionality]
-    B --> H[PostHog integration]
+```
+TaskHog App
+├── App.tsx (Main component)
+│   ├── Todo list display
+│   ├── Add todo functionality
+│   ├── Mark complete functionality
+│   └── PostHog integration
+├── components/ (UI components)
+└── styles/ (CSS files)
 ```
 
 We’ll add a new **Mark all complete** button and put it behind a feature flag without ever leaving your IDE. In other words, no need to open your browser, ever. As you will see, using MCP, you will just chat with your agent and:
