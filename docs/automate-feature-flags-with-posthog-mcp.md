@@ -166,11 +166,9 @@ For these scenarios, use PostHog's dashboard for manual review and approval work
 
 ## Step 3: Invite a test cohort
 
-Use feature flags to test changes with small groups before wide rollouts. You can target specific users or groups.
+Use feature flags to test changes with small groups before wide rollouts. For example, you can target:
 
-With MCP, you can change feature-flag targeting rules from your dev environment and target:
-
-- users sharing a specific trait (for example, an email domain),
+- users sharing a specific trait (such as an email domain),
 - a small percentage of users, or
 - an explicit list of users.
 
