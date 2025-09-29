@@ -8,6 +8,13 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+}
+
+.heroBanner .container {
+  width: 100%;
 }
 
 @media screen and (max-width: 996px) {
@@ -20,4 +27,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }

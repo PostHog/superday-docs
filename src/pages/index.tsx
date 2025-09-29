@@ -3,7 +3,6 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 
 import styles from "./index.module.css";
@@ -22,7 +21,15 @@ function HomepageHeader() {
             className="button button--secondary button--lg"
             to="/docs/automate-feature-flags-with-posthog-mcp"
           >
-            Read now: PostHog MCP Server Tutorial
+            📚 Read the tutorial
+          </Link>
+          <Link
+            className="button button--primary button--lg"
+            href="https://github.com/sylwiavargas/TaskHog"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🤖 Explore the code →
           </Link>
         </div>
       </div>
@@ -38,9 +45,6 @@ export default function Home(): ReactNode {
       description="Description will go into a meta tag in <head />"
     >
       <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
     </Layout>
   );
 }
