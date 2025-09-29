@@ -98,3 +98,32 @@ But you don’t need to switch contexts. You can keep working in your editor and
 ```
 
 ## Step 3: Invite a test cohort
+
+Feature flags are most useful when you can test changes with a small group before rolling them out widely. With MCP, you can target specific users or groups without leaving your editor.
+
+With MCP, you can change feature-flag targeting rules from your dev environment and target:
+
+- users sharing a specific trait (for example, an email domain),
+- a small percentage of users, or
+- an explicit list of users.
+
+PostHog’s MCP server supports operations like `update-feature-flag` to modify filters, rollout settings, and user targeting.
+
+Here are example commands you might run (adapt them to your MCP client or API syntax):
+
+```bash
+# Target only users with @acme.com in their email
+/mcp update-feature-flag --key mark-all-complete --filters 'email CONTAINS "@example.com"'
+
+# Or set a small rollout percentage (for example, 10%)
+/mcp update-feature-flag --key mark-all-complete --rollout 10
+
+# Or target a specific list of users by identifier (for example, user IDs or emails)
+/mcp update-feature-flag --key mark-all-complete --users user1@example.com user2@example.com
+```
+
+After applying the targeting rules:
+
+- Ask your testers (for instance, your colleagues) to access the feature.
+- Use PostHog’s UI or metrics API to confirm that only those in your test cohort have the feature enabled.
+- Monitor feedback and metrics before you expand the rollout.
