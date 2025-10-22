@@ -1,0 +1,57 @@
+---
+title: What is MCP?
+sidebar_position: 1
+---
+
+import { TutorialProgress } from '@site/src/components/TutorialComponents';
+
+<TutorialProgress current={1} total={7} />
+
+# What is MCP?
+
+[MCP](https://modelcontextprotocol.io/) (Model Context Protocol) is an open standard that lets AI assistants access external tools and data sources. Instead of manually copying errors from PostHog into your IDE, MCP lets your AI fetch that data directly.
+
+Think of it as an API for your AI assistant.
+
+---
+
+## How it works
+
+MCP has three parts working together:
+
+- **Client**: Your AI assistant (Cursor, Claude Desktop, Windsurf, etc.)  
+- **Server**: PostHog MCP server (what you'll install next)  
+- **Tools**: Functions that query PostHog's API
+
+When you ask your AI a question about production errors, the MCP client calls the PostHog MCP server, which fetches the data using PostHog's API.
+
+---
+
+## Why it matters
+
+Without MCP, debugging can be painful:
+1. Open PostHog dashboard
+2. Find the error
+3. Copy stack trace
+4. Switch to IDE
+5. Paste into chat
+6. Ask AI to analyze
+7. Repeat for every error
+
+With MCP, debugging doesn't have to be painful:
+1. Ask AI: `Show me checkout errors from the last hour`
+2. Get answer immediately
+
+No context switching. No manual copy-paste. Just answers.
+
+---
+
+## What you can do with PostHog's MCP server
+
+PostHog's MCP server gives your AI access to:
+
+- **Error tracking**: Query exceptions, stack traces, and affected users  
+- **Feature flags**: Check flag status, correlate errors with rollouts, toggle kill switches  
+- **Analytics**: Run HogQL queries, fetch insights, analyze patterns
+
+In this tutorial, we'll focus on debugging production errors using these tools together.

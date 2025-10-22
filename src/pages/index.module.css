@@ -1,23 +1,167 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
 .heroBanner {
-  padding: 4rem 0;
+  padding: 4rem 2rem;
   text-align: center;
+  background: var(--ph-bg);
+  border-bottom: 3px solid var(--ph-text);
   position: relative;
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hedgehog {
+  font-size: 6rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-align: left;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: var(--ph-text);
+  text-align: left;
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.secondaryButton {
+  border: 2px solid var(--ph-text);
+  background: white;
+  color: var(--ph-text);
+}
+
+.secondaryButton:hover {
+  background: var(--ph-accent);
+}
+
+.quickStats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ph-red);
+  text-transform: uppercase;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: var(--ph-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
+/* Tutorial Highlights */
+.highlights {
+  padding: 4rem 2rem;
+  background: white;
+}
+
+[data-theme='dark'] .highlights {
+  background: #1a1a1a;
+}
+
+.highlights h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.highlightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.highlightCard {
+  background: var(--ph-accent);
+  border: 3px solid var(--ph-text);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.highlightCard:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.highlightCard h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.highlightCard p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem 1rem;
+  }
+  
+  .heroContent {
+    flex-direction: column;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  
+  .heroSubtitle {
+    text-align: center;
+  }
+  
+  .hedgehog {
+    font-size: 4rem;
+  }
+  
+  .quickStats {
+    gap: 1.5rem;
+  }
 }

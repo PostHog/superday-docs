@@ -1,0 +1,89 @@
+---
+title: Install PostHog MCP server
+sidebar_position: 2
+---
+
+import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialComponents';
+
+<TutorialProgress current={2} total={7} />
+
+## Prerequisites
+
+- **PostHog account**: [Sign up free](https://us.posthog.com/signup) if you don't have one
+- **AI assistant**: [Claude Desktop](https://claude.ai/download), [Cursor](https://cursor.sh/), or [Windsurf](https://codeium.com/windsurf)
+- **Node.js**: Only needed if you're generating test errors later
+
+:::tip Skip ahead?
+Already have a PostHog project with production data? You can skip the test error generation in Step 5.
+:::
+
+## Step 1: Get your personal API key
+
+You need a **personal API key** (not a project API key) to use MCP.
+
+1. Go to [PostHog Settings > Personal API Keys](https://us.posthog.com/settings/user-api-keys)
+2. Click **+ Create personal API key**
+3. Name it something like `MCP Server`
+4. Copy the key immediately (you won't see it again)
+
+:::warning Warning
+Personal API keys have full account access. Keep them secure and never commit them to version control.
+:::
+
+## Step 2: Install the MCP server
+
+PostHog offers two installation methods:
+
+- **Quick install (recommended):** Use the [PostHog MCP wizard](https://posthog.com/docs/model-context-protocol#quick-install-using-the-posthog-wizard) for guided setup
+- **Manual install:** Follow the [manual installation guide](https://posthog.com/docs/model-context-protocol#manual-install) if you prefer full control
+
+Choose whichever method works for you, then come back here to verify it works.
+
+## Step 3: Restart your AI client
+
+Close and reopen your AI assistant completely. This loads the new MCP configuration.
+
+## Step 4: Verify it works
+
+Let's test the connection with three quick prompts.
+
+### List MCP tools
+
+**Prompt:**
+```
+What PostHog MCP tools are available?
+```
+
+**Expected:** Your AI should list tools like `list-errors`, `get-error-details`, `feature-flag-get-all`, etc.
+
+### List projects
+
+**Prompt:**
+```
+List my PostHog projects
+```
+
+**Expected:** You should see your project name and ID.
+
+### Query errors
+
+**Prompt:**
+```
+Show me the most recent errors in my PostHog project
+```
+
+**Expected:** 
+- If you have errors: A list of recent exceptions
+- If you don't: A message saying no errors found (we'll generate some next!)
+
+---
+
+<Checkpoint title="Installation Complete">
+
+All three tests should pass:
+
+- MCP tools are listed
+- Your project appears
+- Error query runs (even if empty)
+
+</Checkpoint>

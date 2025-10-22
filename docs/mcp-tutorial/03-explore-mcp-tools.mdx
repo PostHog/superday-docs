@@ -1,0 +1,134 @@
+---
+title: Explore MCP tools
+sidebar_position: 3
+---
+
+import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialComponents';
+
+<TutorialProgress current={3} total={7} />
+
+# Explore MCP tools
+
+Now that MCP is installed, let's explore what you can actually do with it. We'll focus on the tools most useful for debugging production errors.
+
+---
+
+## The tools you'll use in this tutorial
+
+PostHog's MCP server includes [dozens of tools](https://posthog.com/docs/model-context-protocol#available-tools), but for error debugging, you'll primarily use these five in this tutorial:
+
+**Error tracking:**
+- `list-errors`: Query exceptions with filters
+- `get-error-details`: Deep-dive into specific errors
+
+**Context gathering:**
+- `feature-flag-get-all`: Check which flags were active
+- `query-run`: Run custom HogQL queries
+- `query-generate-hogql-from-question`: Convert natural language to HogQL
+
+Let's see them in action.
+
+---
+
+## Your first MCP query
+
+Let's start simple. Ask your AI:
+```
+Show me the 5 most recent errors in my PostHog project
+```
+
+**What happens behind the scenes:**
+
+1. **AI parses your intent**: Understands you want recent errors
+2. **Selects `list-errors` tool**: Chooses the right API endpoint
+3. **Constructs parameters**: Sets `limit: 5` and `order_by: last_seen`
+4. **Calls PostHog API via MCP**: Fetches data from your project
+5. **Formats the response**: Returns readable error summaries
+
+**Expected response:**
+- Error messages
+- Stack traces
+- Number of affected users
+- Last occurrence timestamp
+
+---
+
+## Common query patterns
+
+Once you understand the basic flow, you can ask more in-depth questions. Here are patterns that work well:
+
+### Time-based filtering
+```
+Show me errors from the last hour
+```
+```
+What errors happened between 2 PM and 4 PM yesterday?
+```
+
+
+### Priority filtering
+```
+Show me the top 5 errors by volume
+```
+```
+Which errors are affecting the most users?
+```
+
+
+### Pattern detection
+```
+Are there any new errors that started today?
+```
+```
+Show me errors that only happen on mobile
+```
+
+
+### Feature flag correlation
+```
+Show me errors that happened while the new-checkout flag was enabled
+```
+```
+Did error rates change after rolling out feature X?
+```
+
+This is where MCP shines. Your AI can correlate errors with feature flag rollouts automatically.
+
+---
+
+## Understanding error data
+
+When you query errors, PostHog returns key fields that help you debug:
+
+- **`message`**: The error message (e.g., "Cannot read property 'id' of undefined")
+- **`stack_trace`**: Full stack trace showing where the error occurred
+- **`occurrences`**: How many times this error happened
+- **`affected_users`**: Number of unique users who hit this error
+- **`last_seen`**: When it last occurred
+- **`properties`**: Additional context (browser, OS, custom properties)
+
+Your AI formats this automatically, but knowing what's available helps you ask better questions.
+
+## Try it yourself
+
+Practice these queries in your AI assistant:
+
+1. **List recent errors:** *"Show me the 10 most recent errors"*
+2. **Check a specific route:** *"Are there any errors on the /checkout page?"*
+3. **Correlate with flags:** *"Show me all active feature flags in my project"*
+
+:::tip No errors yet?
+If you don't have production errors yet, that's fine! We'll generate test errors in the next section so you have realistic data to debug.
+:::
+
+---
+
+<Checkpoint title="Ready to Debug">
+
+Before moving on, make sure you can:
+
+- Query errors using natural language
+- See formatted error details in your AI assistant
+- Understand what data PostHog returns
+
+</Checkpoint>

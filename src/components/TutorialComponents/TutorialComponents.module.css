@@ -1,0 +1,245 @@
+.tutorialMeta {
+  background: var(--ph-accent);
+  border: 3px solid var(--ph-text);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.05);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed var(--ph-border);
+}
+
+.metaRow:last-child {
+  border-bottom: none;
+}
+
+.metaLabel {
+  font-weight: 700;
+  min-width: 180px;
+  color: var(--ph-text);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metaValue {
+  color: var(--ph-text);
+  font-weight: 500;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background: var(--ph-red);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Progress indicator */
+.progressContainer {
+  background: var(--ifm-background-surface-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid var(--ifm-color-emphasis-300);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.progressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.progressText {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.progressPercentage {
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 16px;
+  overflow: visible;
+  border: 2px solid var(--ifm-color-emphasis-300);
+}
+
+.progressFill {
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(90deg, #F54E00 0%, #DC9300 100%);
+  transition: width 0.5s ease;
+  border-radius: 14px;
+}
+
+.progressHedgehog {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: left 0.5s ease;
+  z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.progressHedgehog img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+@keyframes hedgehogRun {
+  0% { 
+    transform: translateY(-50%) translateX(0) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-50%) translateX(-3px) rotate(-3deg); 
+  }
+  50% { 
+    transform: translateY(-50%) translateX(0) rotate(0deg); 
+  }
+  75% { 
+    transform: translateY(-50%) translateX(3px) rotate(3deg); 
+  }
+  100% { 
+    transform: translateY(-50%) translateX(0) rotate(0deg); 
+  }
+}
+
+.progressHedgehogRunning {
+  animation: hedgehogRun 0.6s ease-in-out infinite;
+}
+
+@keyframes hedgehogCelebrate {
+  0%, 100% { 
+    transform: translateY(-50%) scale(1); 
+  }
+  50% { 
+    transform: translateY(-60%) scale(1.15); 
+  }
+}
+
+.progressHedgehogComplete {
+  animation: hedgehogCelebrate 0.8s ease-in-out 3;
+}
+
+[data-theme='dark'] .progressContainer {
+  background: #1a1a1a;
+  border-color: #4B4B4B;
+}
+
+[data-theme='dark'] .progressBar {
+  background: #2C2C2C;
+  border-color: #4B4B4B;
+}
+
+[data-theme='dark'] .progressText {
+  color: rgba(238, 239, 233, 0.7);
+}
+
+@media (max-width: 768px) {
+  .progressContainer {
+    padding: 1rem;
+  }
+  
+  .progressHedgehog img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .progressBar {
+    height: 28px;
+  }
+}
+
+/* Checkpoint */
+.checkpoint {
+  background: rgba(245, 78, 0, 0.05);
+  border: 3px solid var(--ph-red);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 8px 8px 0 rgba(245, 78, 0, 0.1);
+}
+
+.checkpointHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.checkpointIcon {
+  background: var(--ph-red);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.checkpointHeader h3 {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ph-red);
+}
+
+.checkpointContent {
+  padding-left: 2.5rem;
+}
+
+.checkpointContent ul {
+  list-style: none;
+  padding: 0;
+}
+
+.checkpointContent li {
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.checkpointContent li::before {
+  content: '✓';
+  position: absolute;
+  left: -1.5rem;
+  color: var(--ph-red);
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .metaLabel {
+    min-width: auto;
+    margin-bottom: 0.5rem;
+  }
+  
+  .metaRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
