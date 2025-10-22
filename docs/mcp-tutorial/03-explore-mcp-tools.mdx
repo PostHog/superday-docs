@@ -11,8 +11,6 @@ import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialCompo
 
 Now that MCP is installed, let's explore what you can actually do with it. We'll focus on the tools most useful for debugging production errors.
 
----
-
 ## The tools you'll use in this tutorial
 
 PostHog's MCP server includes [dozens of tools](https://posthog.com/docs/model-context-protocol#available-tools), but for error debugging, you'll primarily use these five in this tutorial:
@@ -27,8 +25,6 @@ PostHog's MCP server includes [dozens of tools](https://posthog.com/docs/model-c
 - `query-generate-hogql-from-question`: Convert natural language to HogQL
 
 Let's see them in action.
-
----
 
 ## Your first MCP query
 
@@ -51,8 +47,6 @@ Show me the 5 most recent errors in my PostHog project
 - Number of affected users
 - Last occurrence timestamp
 
----
-
 ## Common query patterns
 
 Once you understand the basic flow, you can ask more in-depth questions. Here are patterns that work well:
@@ -65,7 +59,6 @@ Show me errors from the last hour
 What errors happened between 2 PM and 4 PM yesterday?
 ```
 
-
 ### Priority filtering
 ```
 Show me the top 5 errors by volume
@@ -74,7 +67,6 @@ Show me the top 5 errors by volume
 Which errors are affecting the most users?
 ```
 
-
 ### Pattern detection
 ```
 Are there any new errors that started today?
@@ -82,7 +74,6 @@ Are there any new errors that started today?
 ```
 Show me errors that only happen on mobile
 ```
-
 
 ### Feature flag correlation
 ```
@@ -93,8 +84,6 @@ Did error rates change after rolling out feature X?
 ```
 
 This is where MCP shines. Your AI can correlate errors with feature flag rollouts automatically.
-
----
 
 ## Understanding error data
 
@@ -120,8 +109,6 @@ Practice these queries in your AI assistant:
 :::tip No errors yet?
 If you don't have production errors yet, that's fine! We'll generate test errors in the next section so you have realistic data to debug.
 :::
-
----
 
 <Checkpoint title="Ready to Debug">
 
