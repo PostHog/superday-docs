@@ -9,13 +9,15 @@ import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialCompo
 
 ## Prerequisites
 
+Before you begin, make sure you have:
+
 - **PostHog account**: [Sign up free](https://us.posthog.com/signup) if you don't have one
-- **AI assistant**: [Claude Desktop](https://claude.ai/download), [Cursor](https://cursor.sh/), or [Windsurf](https://codeium.com/windsurf)
-- **Node.js**: Only needed if you're generating test errors later
+- **AI assistant**: [Claude Desktop](https://claude.ai/download), [Cursor](https://cursor.sh/), [Windsurf](https://codeium.com/windsurf), or another AI assistant of your choice
+- **Node.js**: [Download](https://nodejs.org/en/download) only needed if you're [generating test errors later](/docs/mcp-tutorial/generate-errors)
 
 ## Step 1: Get your personal API key
 
-You need a **personal API key** (not a project API key) to use MCP:
+You need a **personal API key** (not a project API key) to use the PostHog MCP server:
 
 1. Go to [PostHog Settings > Personal API Keys](https://us.posthog.com/settings/user-api-keys).
 2. Click **+ Create personal API key**.
@@ -24,12 +26,12 @@ You need a **personal API key** (not a project API key) to use MCP:
 5. Copy the key immediately (you won't see it again).
 
 :::warning Warning
-Personal API keys have full account access. We recommend giving your API key fine-grained permissions for enhanced security.
+We recommend giving your API key fine-grained permissions for enhanced security. Do not share your key or commit it to your project.
 :::
 
-## Step 2: Install the MCP server
+## Step 2: Install the PostHog MCP server
 
-PostHog offers two installation methods:
+PostHog offers two installation methods for the MCP server:
 
 - **Quick install (recommended)**: Use the [PostHog MCP wizard](https://posthog.com/docs/model-context-protocol#quick-install-using-the-posthog-wizard) for guided setup
 - **Manual install**: Follow the [manual installation guide](https://posthog.com/docs/model-context-protocol#manual-install) if you prefer full control
@@ -75,7 +77,7 @@ Show me the most recent errors in my PostHog project
 
 <Checkpoint title="Lesson recap">
 
-All three tests should pass:
+You've installed the PostHog MCP server and connected it to your AI assistant. All three tests should pass:
 
 - MCP tools are listed
 - Your project appears

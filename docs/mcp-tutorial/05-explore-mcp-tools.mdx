@@ -9,18 +9,18 @@ import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialCompo
 
 # Explore MCP tools
 
-Now that we have test data, let's explore what you can actually do with it. We'll focus on the tools most useful for debugging production errors.
+Now, let's explore what tools you can access with the PostHog MCP server. We'll focus on the tools most useful for debugging production errors.
 
-## The tools you'll use
+## Useful debugging tools
 
 PostHog's MCP server includes [dozens of tools](https://posthog.com/docs/model-context-protocol#available-tools), but for error debugging, you'll primarily use these five in this tutorial:
 
-**Error tracking:**
+Error tracking:
 
 - `list-errors`: Query exceptions with filters
 - `get-error-details`: Deep-dive into specific errors
 
-**Context gathering:**
+Context gathering:
 
 - `feature-flag-get-all`: Check which flags were active
 - `query-run`: Run custom HogQL queries
@@ -28,14 +28,14 @@ PostHog's MCP server includes [dozens of tools](https://posthog.com/docs/model-c
 
 Let's see them in action.
 
-## Your first MCP query
+## Examine an MCP query
 
-Let's start simple. Ask your AI:
+Let's start simple. Ask your AI assistant:
 ```text
 Show me the 5 most recent errors in my PostHog project
 ```
 
-**What happens behind the scenes:**
+What happens behind the scenes:
 
 1. **AI parses your intent**: Understands you want recent errors
 2. **Selects `list-errors` tool**: Chooses the right API endpoint
@@ -43,7 +43,8 @@ Show me the 5 most recent errors in my PostHog project
 4. **Calls PostHog API via MCP**: Fetches data from your project
 5. **Formats the response**: Returns readable error summaries
 
-**Expected response:**
+Expected response:
+
 - Error messages
 - Stack traces
 - Number of affected users
@@ -104,13 +105,13 @@ Your AI formats this automatically, but knowing what's available helps you ask b
 
 Practice these queries in your AI assistant:
 
-1. **List recent errors**: `Show me the 10 most recent errors`
-2. **Check a specific route**: `Are there any errors on the /checkout page?`
-3. **Correlate with flags**: `Show me all active feature flags in my project`
+1. List recent errors: `Show me the 10 most recent errors`
+2. Check a specific route: `Are there any errors on the /checkout page?`
+3. Correlate with flags: `Show me all active feature flags in my project`
 
 <Checkpoint title="Lesson recap">
 
-Before moving on, make sure you can:
+In this lesson, you learned to:
 
 - Query errors using natural language
 - See formatted error details in your AI assistant
