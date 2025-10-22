@@ -5,6 +5,8 @@ hide_table_of_contents: true
 ---
 
 import { TutorialMeta } from '@site/src/components/TutorialComponents';
+import StartCard from '@site/src/components/TutorialComponents/StartCard';
+import styles from '@site/src/components/TutorialComponents/TutorialComponents.module.css';
 
 # Debug production errors with PostHog MCP
 
@@ -34,26 +36,25 @@ That's exactly what PostHog's MCP server enables.
 
 ## What you'll learn
 
-By the end of this tutorial, you'll be able to:
+By the end of this tutorial, you'll build a production-ready error monitoring setup and be able to:
 
 - Set up PostHog's MCP server in your IDE
 - Query production errors using natural language
 - Use AI to analyze and triage issues
 - Build a production debugging workflow that actually works
 
-## What you'll build
-
-- A Next.js app with intentional errors (for safe, reproducible testing)
-- An AI-powered debugging workflow using MCP
-- A production-ready error monitoring setup
-
 ## Ready to start?
 
-Let's get started! 
-
-**Begin with:** [What is MCP? →](/docs/mcp-tutorial/what-is-mcp)
-
-Or jump to a specific section if you're already familiar with the basics.
+  <StartCard
+    title="Learn MCP basics"
+    description="Learn what MCP is and get the foundations"
+    href="/docs/mcp-tutorial/what-is-mcp"
+  />
+  <StartCard
+    title="Jump to install"
+    description="Install PostHog MCP server and get started"
+    href="/docs/mcp-tutorial/install-mcp"
+  />
 
 ## Get help
 

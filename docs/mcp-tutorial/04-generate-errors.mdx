@@ -9,3 +9,86 @@ import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialCompo
 
 # Generate test errors
 
+To practice debugging with MCP, you need some errors to work with. Let's create a simple Next.js app with intentional bugs.
+
+:::tip Skip ahead?
+Already have a PostHog project with production data? You can skip this page and start [debugging with AI and MCP](/docs/mcp-tutorial/debug-with-mcp)!
+:::
+
+## Quick setup
+
+Create a new Next.js app with PostHog:
+
+```bash
+# Create app
+# Install PostHog SDK
+```
+
+## Configure PostHog
+
+To prepare your app to capture errors, create a provider:
+
+```typescript
+export function ErrorTrackingProvider({ children }) {
+  // Initialize error tracking
+  return <>{children}</>
+}
+```
+
+Then, wrap your app with it:
+
+```typescript
+export default function RootLayout({ children }) {
+  return (
+    <ErrorTrackingProvider>
+      {children}
+    </ErrorTrackingProvider>
+  )
+}
+```
+
+## Create error trigger using
+
+To trigger your test errors, create a simple interface:
+
+```typescript
+function ErrorGenerator() {
+  return (
+    <>
+      {/* Buttons to trigger each error type, one button per error type */}
+    </>
+  )
+}
+```
+
+## Generate test errors
+
+Run your app:
+
+```bash
+# Placeholder command to run
+```
+
+Then, open your app in your browser and click each button a few times to trigger
+some errors. Trigger a few of the same types of errors to create variety and grouping.
+
+You now have errors to practice debugging with MCP.
+
+## Verify in PostHog dashboard
+
+Check your PostHog dashboard to confirm that your test errors were captured:
+
+1. Go to [PostHog errors](https://us.posthog.com/error_tracking).
+2. You should see your test errors appear within a few minutes.
+3. Click into an error to see the full stack trace.
+
+<Checkpoint title="Errors captured?">
+
+Before moving on, verify:
+
+- App runs at localhost:3000
+- Buttons trigger errors (check browser console)
+- Errors appear in PostHog dashboard
+- Stack traces show file names and line numbers
+
+</Checkpoint>
