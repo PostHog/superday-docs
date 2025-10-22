@@ -116,3 +116,22 @@
     gap: 1.5rem;
   }
 }
+
+.main {
+  padding: 2rem 0 4rem;
+}
+
+.wizardSection {
+  padding: 2rem 0;
+  background: var(--ifm-background-surface-color);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.wizardTitle {
+  font-size: 1.75rem;
+  margin: 0 0 1rem 0;
+}
+
+.hero + .main {
+  margin-top: 0;
+}

@@ -1,11 +1,11 @@
 ---
 title: Generate test errors
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialComponents';
 
-<TutorialProgress current={4} total={7} />
+<TutorialProgress current={3} total={6} />
 
 # Generate test errors
 
@@ -20,8 +20,9 @@ Already have a PostHog project with production data? You can skip this page and 
 Create a new Next.js app with PostHog:
 
 ```bash
-# Create app
-# Install PostHog SDK
+# Placeholder commands:
+# create Next.js app
+# install posthog-js
 ```
 
 ## Configure PostHog
@@ -29,8 +30,9 @@ Create a new Next.js app with PostHog:
 To prepare your app to capture errors, create a provider:
 
 ```typescript
-export function ErrorTrackingProvider({ children }) {
-  // Initialize error tracking
+export function PHProvider({ children }) {
+  // Initialize PostHog SDK
+  // e.g., posthog.init('YOUR_PROJECT_KEY')
   return <>{children}</>
 }
 ```
@@ -40,14 +42,14 @@ Then, wrap your app with it:
 ```typescript
 export default function RootLayout({ children }) {
   return (
-    <ErrorTrackingProvider>
+    <PHProvider>
       {children}
-    </ErrorTrackingProvider>
+    </PHProvider>
   )
 }
 ```
 
-## Create error trigger using
+## Create error trigger UI
 
 To trigger your test errors, create a simple interface:
 
@@ -55,7 +57,10 @@ To trigger your test errors, create a simple interface:
 function ErrorGenerator() {
   return (
     <>
-      {/* Buttons to trigger each error type, one button per error type */}
+      {/* Button to trigger TypeError */}
+      {/* Button to trigger ReferenceError */}
+      {/* Button to trigger Null pointer error */}
+      {/* Button to trigger Async error */}
     </>
   )
 }
@@ -66,15 +71,16 @@ function ErrorGenerator() {
 Run your app:
 
 ```bash
-# Placeholder command to run
+# Placeholder: start your Next.js app
 ```
 
-Then, open your app in your browser and click each button a few times to trigger
-some errors. Trigger a few of the same types of errors to create variety and grouping.
+In the browser:
+- Click each button a few times to trigger errors
+- Trigger multiple instances of the same type to create patterns for later debugging
 
-You now have errors to practice debugging with MCP.
+You now have a sandbox of PostHog-captured test errors.
 
-## Verify in PostHog dashboard
+## Verify errors in PostHog
 
 Check your PostHog dashboard to confirm that your test errors were captured:
 
@@ -82,7 +88,7 @@ Check your PostHog dashboard to confirm that your test errors were captured:
 2. You should see your test errors appear within a few minutes.
 3. Click into an error to see the full stack trace.
 
-<Checkpoint title="Errors captured?">
+<Checkpoint title="Lesson recap">
 
 Before moving on, verify:
 
@@ -90,5 +96,12 @@ Before moving on, verify:
 - Buttons trigger errors (check browser console)
 - Errors appear in PostHog dashboard
 - Stack traces show file names and line numbers
+
+You now have four types of PostHog test errors:
+
+- **Type errors**: Accessing properties on undefined
+- **Reference errors**: Using undeclared variables
+- **Null pointer errors**: Accessing properties on null
+- **Async errors**: Unhandled promise rejections
 
 </Checkpoint>

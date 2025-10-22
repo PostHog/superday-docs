@@ -42,7 +42,7 @@ function HomepageHeader() {
             <div className={styles.statLabel}>To complete</div>
           </div>
           <div className={styles.stat}>
-            <div className={styles.statNumber}>7 modules</div>
+            <div className={styles.statNumber}>6 modules</div>
             <div className={styles.statLabel}>Tutorial</div>
           </div>
           <div className={styles.stat}>

@@ -1,0 +1,110 @@
+---
+title: Debug with AI and MCP
+sidebar_position: 4
+---
+
+import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialComponents';
+
+<TutorialProgress current={4} total={6} />
+
+# Debug with AI and MCP
+
+Now, you’ll practice debugging real-world production errors using PostHog MCP and AI-powered 
+prompts. Each section of this guide walks you through a scenario, the prompts you might use, and what to 
+observe in the dashboard. 
+
+You can follow along with each scenario by copying and pasting the example prompt, or watching the
+accompanying demo video.
+
+## Triage recent errors
+
+**Scenario:** You just woke up to several errors in production. You need a quick overview to prioritize what matters.  
+
+**Example prompt:**
+
+```text
+Show me the most frequent errors in the last 24 hours, grouped by type and affected users.
+```
+
+**What happens**: MCP fetches recent errors and organizes them by frequency, type, and user impact.
+
+**Response example**:
+
+- TypeError: `undefined.property` – 15 users affected
+- ReferenceError: `variable not defined` – 7 users affected
+
+:::note Video placeholder
+Demo: triaging recent errors in PostHog MCP
+:::
+
+## Deep dive on a specific error
+
+**Scenario**: Investigate why a Null pointer error occurred in a particular user session.
+
+**Example prompt**:
+
+```text
+Show the stack trace and recent events leading to the Null pointer error for session XYZ
+```
+
+**What happens**: MCP aggregates session events and highlights the likely cause of the error.
+
+**Response example**:
+- Event sequence shows a misconfigured feature flag
+- Stack trace points to `user.profile.address` being null
+
+:::note Video placeholder
+Demo: deep dive into a specific error in PostHog MCP
+:::
+
+## Analyze user impact
+
+**Scenario**: Determine which features or flows are affected by recent errors.
+
+**Example prompt**:
+
+```text
+Which features had errors affecting more than 10% of users in the last week?
+```
+
+**What happens**: MCP correlates errors with feature flags and usage data to highlight affected areas.
+
+**Response example**:
+- Feature A: 12% of users impacted
+- Feature B: 25% of users impacted
+
+:::note Video placeholder
+Demo: user impact analysis in PostHog MCP
+:::
+
+## Detect patterns and correlations
+
+**Scenario**: Some errors recur across multiple releases. Detect patterns to prevent future incidents.
+
+**Example prompt**:
+
+```text
+Identify recurring error patterns over the last 30 days and highlight common root causes
+```
+
+**What happens**: MCP detects repeated error types, associated components, and common code paths.
+
+**Follow-up prompts**:
+- Suggest grouping similar errors for batch fixes
+- Cross-reference errors with feature flags or releases
+
+:::note Video placeholder
+Demo: detecting error patterns in PostHog MCP
+:::
+
+<Checkpoint title="Lesson recap">
+
+By completing these workflows, you’ve learned to:
+
+- Triage recent errors effectively  
+- Deep dive into individual errors to find root causes  
+- Assess user impact and prioritize fixes  
+- Detect recurring patterns and correlate with features or flags]
+
+</Checkpoint>
+

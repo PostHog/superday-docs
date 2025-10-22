@@ -5,7 +5,7 @@ sidebar_position: 1
 
 import { TutorialProgress } from '@site/src/components/TutorialComponents';
 
-<TutorialProgress current={1} total={7} />
+<TutorialProgress current={1} total={6} />
 
 # What is MCP?
 
@@ -26,6 +26,7 @@ When you ask your AI a question about production errors, the MCP client calls th
 ## Why it matters
 
 Without MCP, debugging can be painful:
+
 1. Open PostHog dashboard
 2. Find the error
 3. Copy stack trace
@@ -35,6 +36,7 @@ Without MCP, debugging can be painful:
 7. Repeat for every error
 
 With MCP, debugging doesn't have to be painful:
+
 1. Ask AI: `Show me checkout errors from the last hour`
 2. Get answer immediately
 
@@ -48,4 +50,4 @@ PostHog's MCP server gives your AI access to:
 - **Feature flags**: Check flag status, correlate errors with rollouts, toggle kill switches  
 - **Analytics**: Run HogQL queries, fetch insights, analyze patterns
 
-In this tutorial, we'll focus on debugging production errors using these tools together.
+In the rest of this tutorial, we'll focus on debugging production errors using these tools together.

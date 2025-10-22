@@ -3,9 +3,81 @@ title: Production workflow
 sidebar_position: 6
 ---
 
-import { TutorialProgress } from '@site/src/components/TutorialComponents';
+import { TutorialProgress, Checkpoint } from '@site/src/components/TutorialComponents';
 
-<TutorialProgress current={6} total={7} />
+<TutorialProgress current={6} total={6} />
 
 # Production workflow
 
+In this guide, you’ll learn how to handle real-world debugging in production using MCP. You’ll practice integrating alerts, running daily error triage, and applying advanced MCP patterns for proactive monitoring.
+
+## Daily debugging patterns
+
+In production, errors can occur at any time. A consistent routine helps you surface and prioritize critical issues quickly.
+
+Recommended daily checks:
+
+- Review recent errors in MCP to spot trends.  
+- Identify which errors affect key users or features.  
+- Prioritize by frequency and user impact.  
+- Take immediate action if an error is widespread. For example, roll out a temporary feature flag to limit exposure.
+
+Keeping this rhythm ensures that your team reacts before users are deeply affected.
+
+## Integration with alerts
+
+The faster you’re notified, the faster you can mitigate issues.
+
+To improve response time:
+
+- Configure alerts for high-impact errors.  
+- Include stack traces, affected sessions, and feature flags in the alert payload.  
+- Send alerts through channels your team monitors (Slack, email, or internal dashboards).  
+
+This setup ensures your team is notified before issues escalate, helping you catch incidents early and reduce downtime.
+
+## Advanced MCP patterns
+
+MCP becomes even more powerful when combined with other tools and datasets.
+
+You can use it to:
+
+- Detect recurring error patterns across releases or features.  
+- Analyze user impact by linking errors to segments or cohorts.  
+- Run custom HogQL queries to investigate anomalies.  
+- Roll out or revert feature flags dynamically when production errors spike.
+
+These workflows help you move from reactive troubleshooting to proactive reliability management.
+
+## Example production workflow
+
+Here’s an example of a daily production debugging loop using MCP prompts:
+
+1. `Show today’s errors.`  
+2. `For each error, check if it’s linked to any feature flags.`  
+3. `For the most frequent errors, list affected user IDs.`  
+4. `Take mitigation actions for critical issues (rollback flags, ship hotfixes, or alert engineers).`  
+5. `Document incidents for retrospective analysis.`  
+
+Running this loop each morning keeps your system stable and your team aligned on priorities.
+
+## Proactive monitoring
+
+Beyond daily triage, proactive monitoring helps you detect anomalies before users do. 
+
+Best practices:
+
+- Set threshold-based alerts or rules to catch spikes automatically.  
+- Correlate errors with feature flags, user sessions, and releases for context.  
+- Schedule regular reviews of recurring error patterns to guide long-term fixes.  
+
+<Checkpoint title="Lesson recap">
+
+By completing this lesson, you’ve learned to:
+
+- Establish a consistent production debugging routine  
+- Integrate alerting for faster issue detection  
+- Apply advanced MCP patterns to prevent recurring issues  
+- Move from reactive fixes to proactive monitoring  
+
+</Checkpoint>

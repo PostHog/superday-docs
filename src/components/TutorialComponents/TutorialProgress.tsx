@@ -15,7 +15,7 @@ export function TutorialProgress({ current, total }: TutorialProgressProps) {
     <div className={styles.progressContainer}>
       <div className={styles.progressHeader}>
         <span className={styles.progressText}>
-          Step {current} of {total}
+          Lesson {current} of {total}
         </span>
       </div>
       
