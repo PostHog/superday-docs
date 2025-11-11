@@ -1,47 +1,69 @@
 ---
+title: Track email engagement in PostHog
+sidebar_label: Overview
+description: Learn how to automatically capture email events (delivered, opened, clicked, bounced) from Resend into PostHog for deeper user analytics.
+slug: /email-tracking
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Track email engagement in PostHog
 
-Let's discover **Docusaurus in less than 5 minutes**.
 
-## Getting Started
+Email can be a critical touchpoint in your user journey, but it's usually siloed from your product analytics. By bringing email engagement data into PostHog, you can:
 
-Get started by **creating a new site**.
+- Understand the complete user journey
+- Build smarter funnels
+- Segment users by email engagement 
+- Optimize email campaigns with A/B testing
+- Measure email ROI
+- Identify and prevent churn
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Read more about these uses cases in [Do more](/docs/do-more.md).
 
-### What you'll need
+## What you'll learn
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+This tutorial shows you how to use **PostHog's incoming webhooks** to receive email events directly from [Resend](https://resend.com/) and transform them into PostHog analytics events using [Hog](https://posthog.com/docs/hog).
 
-## Generate a new site
+We'll track these email-related events: 
 
-Generate a new Docusaurus site using the **classic template**.
+- `email_delivered` - Email successfully delivered
+- `email_opened` - User opened the email
+- `email_link_clicked` - User clicked a link (includes which link)
+- `email_bounced` - Email bounced (hard or soft)
+- `email_spam_complaint` - User marked as spam
 
-The classic template will automatically be added to your project after you run the command:
+:::note
 
-```bash
-npm init docusaurus@latest my-website classic
+To track `email_opened` and `email_link_clicked`, you need a [verified domain in Resend](https://resend.com/docs/dashboard/domains/introduction) with Open Tracking and Link Tracking enabled.
+
+:::
+
+The process works like this: 
+
+1. **Email event occurs** - User interacts with your email
+2. **Resend sends webhook** - HTTP POST to your PostHog webhook URL
+3. **Hog transforms data** - Maps Resend events to PostHog format
+4. **Event captured** - Stored in PostHog for analysis
+
+For a detailed technical explanation, see [How It Works](./how-it-works).
+
+If you're more of a sequence diagram person: 
+
+```mermaid
+sequenceDiagram
+    participant R as Resend
+    participant P as PostHog
+    
+    R->>R: Send email
+    R->>R: Email event occurs
+    R->>P: POST webhook payload
+    P->>P: Hog transformation
+    P->>P: Capture event
+    Note over P: Event available in analytics
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## What's next
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+Ready to get started? Head to the [Setup Tutorial](./tutorial) to begin tracking email events in PostHog.
 
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Or, if you want to understand how it works first, check out [How It Works](./how-it-works).
