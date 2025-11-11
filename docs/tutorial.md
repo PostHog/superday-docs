@@ -319,4 +319,4 @@ Check out the [Troubleshooting Guide](./troubleshooting) for detailed solutions 
 
 Yay! You're now tracking email events in PostHog.
 
-Learn more in the [Going Further](./going-further) guide.
+Learn more in the [Going Further](./do-more) guide.

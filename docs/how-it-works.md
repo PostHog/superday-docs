@@ -125,4 +125,4 @@ PostHog incoming webhooks can handle thousands of requests per second with auto-
 # Next steps
 
 - [Try the tutorial](./tutorial) to set up the integration
-- [Learn about extending it](./going-further) for advanced use cases
+- [Learn about extending it](./do-more) for advanced use cases
