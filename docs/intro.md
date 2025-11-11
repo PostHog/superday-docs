@@ -34,7 +34,7 @@ We'll track these email-related events:
 
 :::note
 
-To track `email_opened` and `email_link_clicked`, you need a [verified domain in Resend](https://resend.com/docs/dashboard/domains/introduction) with Open Tracking and Link Tracking enabled.
+To track `email_opened` and `email_link_clicked`, you need a [verified domain in Resend](https://resend.com/docs/dashboard/domains/introduction) with **Open Tracking** and **Link Tracking** enabled.
 
 :::
 
