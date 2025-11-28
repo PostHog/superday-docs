@@ -1,3 +1,5 @@
+trigger vercel
+
 Hello 👋,
 
 Here's where you'll be working. To accomplish your SuperDay task, we've provided a vanilla install of Docusaurus, a prebuilt documentation site. Its authoring and development features are documented here in this repo and on their website.
